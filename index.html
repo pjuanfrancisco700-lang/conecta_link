@@ -228,6 +228,11 @@
       cursor: pointer;
     }
 
+    .btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
     .btn.primary {
       background: linear-gradient(135deg, #b87d32, #d6a254);
       color: white;
@@ -247,6 +252,7 @@
       border-radius: 18px;
       padding: 20px 14px;
       margin-bottom: 26px;
+      scroll-margin-top: 20px;
     }
 
     .details-grid {
@@ -324,6 +330,7 @@
       padding: 30px 10px;
       color: var(--muted);
       font-family: Arial, sans-serif;
+      line-height: 1.5;
     }
 
     .menu-panel {
@@ -491,7 +498,7 @@
         <div class="status" id="currentStatus"></div>
       </section>
 
-      <section class="details">
+      <section class="details" id="detalles">
         <div class="divider" style="margin-top:0;">Detalles del evento</div>
 
         <div class="details-grid">
@@ -560,6 +567,7 @@
     let invitadoActual = null;
     let configuracion = {};
     let selectedStatus = "";
+    let isSaving = false;
 
     const DEFAULT_CONFIG = {
       "Tipo evento": "NUESTRA BODA",
@@ -592,7 +600,18 @@
 
     function getParam(name) {
       const params = new URLSearchParams(window.location.search);
-      return params.get(name);
+      let value = params.get(name);
+
+      if (value) return value;
+
+      const hash = window.location.hash || "";
+
+      if (hash.includes("?")) {
+        const hashParams = new URLSearchParams(hash.split("?")[1]);
+        value = hashParams.get(name);
+      }
+
+      return value;
     }
 
     async function obtenerInvitado(id) {
@@ -617,7 +636,7 @@
         document.getElementById("content").style.display = "block";
 
       } catch (error) {
-        showError("No se pudo conectar con la base de datos.");
+        showError("No se pudo conectar con la base de datos. Revisa el enlace del Apps Script o la conexión.");
       }
     }
 
@@ -647,18 +666,27 @@
     function renderInvitado() {
       document.getElementById("guestName").textContent = invitadoActual.nombre || "Invitado especial";
 
-      const personas = invitadoActual.personasInvitadas || 1;
+      const personas = Number(invitadoActual.personasInvitadas) || 1;
+
       document.getElementById("guestExtra").innerHTML =
         `Gracias por ser parte de este momento tan especial.<br>Invitación para <strong>${personas}</strong> persona(s).`;
 
       const estado = invitadoActual.estado || "Pendiente";
-      document.getElementById("currentStatus").textContent = "Estado actual: " + estado;
 
-      document.getElementById("personasInput").max = personas;
-      document.getElementById("personasInput").value = personas;
+      document.getElementById("currentStatus").textContent =
+        "Estado actual: " + estado;
+
+      const input = document.getElementById("personasInput");
+      input.max = personas;
+      input.value = personas;
     }
 
     function openConfirmModal(status) {
+      if (!invitadoActual) {
+        alert("La invitación aún no está cargada.");
+        return;
+      }
+
       selectedStatus = status;
 
       const maxPersonas = Number(invitadoActual.personasInvitadas) || 1;
@@ -670,6 +698,8 @@
         document.getElementById("modalText").textContent = "Indica cuántas personas asistirán.";
         document.getElementById("personasInput").style.display = "block";
         document.getElementById("personasInput").value = maxPersonas;
+        document.getElementById("personasInput").min = 1;
+        document.getElementById("personasInput").max = maxPersonas;
       } else {
         document.getElementById("modalTitle").textContent = "No podré asistir";
         document.getElementById("modalText").textContent = "Lamentamos que no puedas acompañarnos. Puedes dejar un comentario opcional.";
@@ -679,14 +709,25 @@
     }
 
     function closeConfirmModal() {
+      if (isSaving) return;
       document.getElementById("confirmModal").classList.remove("active");
     }
 
     async function submitConfirmation() {
-      if (!invitadoActual || !selectedStatus) return;
+      if (!invitadoActual || !selectedStatus || isSaving) return;
 
       const personas = document.getElementById("personasInput").value || 0;
       const comentario = document.getElementById("comentarioInput").value || "";
+      const maxPersonas = Number(invitadoActual.personasInvitadas) || 1;
+
+      if (selectedStatus === "Confirmado") {
+        if (Number(personas) <= 0 || Number(personas) > maxPersonas) {
+          alert("La cantidad de personas debe estar entre 1 y " + maxPersonas + ".");
+          return;
+        }
+      }
+
+      isSaving = true;
 
       const btns = document.querySelectorAll(".modal .btn");
       btns.forEach(btn => btn.disabled = true);
@@ -718,15 +759,19 @@
       } catch (error) {
         alert("No se pudo conectar con el servidor.");
       } finally {
+        isSaving = false;
         btns.forEach(btn => btn.disabled = false);
       }
     }
 
     function startCountdown() {
       const fecha = getConfig("Fecha evento");
-      const eventDate = new Date(fecha);
+      const hora = getConfig("Hora evento");
+      const eventDate = parseEventDate(fecha, hora);
 
-      if (isNaN(eventDate.getTime())) return;
+      if (!eventDate || isNaN(eventDate.getTime())) {
+        return;
+      }
 
       function update() {
         const now = new Date();
@@ -753,6 +798,39 @@
 
       update();
       setInterval(update, 1000);
+    }
+
+    function parseEventDate(fecha, hora) {
+      if (!fecha) return null;
+
+      if (fecha instanceof Date) return fecha;
+
+      let fechaTexto = String(fecha).trim();
+
+      if (/^\d{4}-\d{2}-\d{2}$/.test(fechaTexto)) {
+        let horaTexto = convertirHora24(hora || "00:00");
+        return new Date(`${fechaTexto}T${horaTexto}:00`);
+      }
+
+      const intento = new Date(fechaTexto);
+      return intento;
+    }
+
+    function convertirHora24(hora) {
+      let texto = String(hora || "00:00").trim().toUpperCase();
+
+      const match = texto.match(/^(\d{1,2}):?(\d{2})?\s*(AM|PM)?$/);
+
+      if (!match) return "00:00";
+
+      let h = Number(match[1]);
+      let m = match[2] ? Number(match[2]) : 0;
+      const ampm = match[3];
+
+      if (ampm === "PM" && h < 12) h += 12;
+      if (ampm === "AM" && h === 12) h = 0;
+
+      return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
     }
 
     function setupMusic() {
@@ -784,6 +862,12 @@
       document.getElementById("menuBtn").addEventListener("click", () => {
         document.getElementById("menuPanel").classList.add("active");
       });
+
+      document.getElementById("menuPanel").addEventListener("click", (e) => {
+        if (e.target.id === "menuPanel") {
+          closeMenu();
+        }
+      });
     }
 
     function closeMenu() {
@@ -791,13 +875,19 @@
     }
 
     function showError(msg) {
-      document.getElementById("loading").innerHTML = msg;
+      document.getElementById("loading").innerHTML = `
+        <div style="color:#e8c48a;font-size:18px;margin-bottom:8px;">No pudimos cargar la invitación</div>
+        <div>${msg}</div>
+      `;
+
+      document.getElementById("content").style.display = "none";
     }
 
     function formatDateText(value) {
       if (!value) return "--";
 
       const date = new Date(value);
+
       if (isNaN(date.getTime())) return value;
 
       return date.toLocaleDateString("es-GT", {
