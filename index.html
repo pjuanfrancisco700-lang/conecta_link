@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="color-scheme" content="light">
+  <title>Invitación Especial</title>
+
+  <style>
+    :root {
+      --gold: #c89146;
+      --gold-light: #e8c48a;
+      --dark: #080604;
+      --glass: rgba(0, 0, 0, 0.55);
+      --text: #fff8ec;
+      --muted: #d7c8b5;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #050505;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body {
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.95)),
+        url("fondo-boda.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 22px 18px 40px;
+      background: linear-gradient(to bottom, rgba(0,0,0,.30), rgba(0,0,0,.84));
+      backdrop-filter: blur(2px);
+      position: relative;
+    }
+
+    .top-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 42px;
+    }
+
+    .music-btn,
+    .menu-btn {
+      border: 1px solid rgba(232,196,138,.55);
+      background: rgba(0,0,0,.35);
+      color: var(--gold-light);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      font-size: 23px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 22px rgba(0,0,0,.25);
+    }
+
+    .music-label {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: #f5ead8;
+      font-size: 14px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 26px 8px 16px;
+    }
+
+    .small-title {
+      letter-spacing: 3px;
+      color: var(--gold-light);
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .couple {
+      font-size: 58px;
+      line-height: 0.95;
+      color: var(--gold-light);
+      font-style: italic;
+      font-weight: 400;
+      text-shadow: 0 8px 25px rgba(0,0,0,.45);
+      margin: 0 0 18px;
+    }
+
+    .subtitle {
+      color: #f7ead9;
+      font-size: 17px;
+      line-height: 1.45;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--gold);
+      margin: 26px 0 18px;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(200,145,70,.8), transparent);
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .time-box {
+      border-right: 1px solid rgba(200,145,70,.5);
+    }
+
+    .time-box:last-child {
+      border-right: none;
+    }
+
+    .time-box strong {
+      display: block;
+      font-size: 39px;
+      font-weight: 400;
+      color: #f3d5a2;
+    }
+
+    .time-box span {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .guest-card {
+      background: rgba(0,0,0,.42);
+      border-top: 1px solid rgba(200,145,70,.26);
+      border-bottom: 1px solid rgba(200,145,70,.26);
+      padding: 26px 14px;
+      text-align: center;
+      margin: 10px 0 24px;
+    }
+
+    .guest-label {
+      font-style: italic;
+      color: var(--gold-light);
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .guest-name {
+      font-size: 42px;
+      line-height: 1.05;
+      margin: 0;
+      color: #fff;
+    }
+
+    .guest-extra {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.45;
+      margin-top: 12px;
+    }
+
+    .confirm-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-family: Arial, sans-serif;
+      color: var(--gold);
+      letter-spacing: 2px;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .btn {
+      border: 1px solid var(--gold);
+      border-radius: 9px;
+      min-height: 54px;
+      background: transparent;
+      color: #fff5e7;
+      font-size: 17px;
+      font-family: Georgia, 'Times New Roman', serif;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #b87d32, #d6a254);
+      color: white;
+      border: none;
+    }
+
+    .deadline {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 14px;
+      line-height: 1.4;
+    }
+
+    .details {
+      background: rgba(0,0,0,.38);
+      border: 1px solid rgba(200,145,70,.22);
+      border-radius: 18px;
+      padding: 20px 14px;
+      margin-bottom: 26px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 12px;
+      text-align: center;
+    }
+
+    .detail-item {
+      border-right: 1px solid rgba(200,145,70,.25);
+      padding: 8px;
+    }
+
+    .detail-item:nth-child(2),
+    .detail-item:nth-child(4) {
+      border-right: none;
+    }
+
+    .icon {
+      color: var(--gold-light);
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .detail-label {
+      font-family: Arial, sans-serif;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      color: #fff3df;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .map-btn {
+      display: block;
+      text-align: center;
+      border: 1px solid var(--gold);
+      border-radius: 9px;
+      color: var(--gold-light);
+      text-decoration: none;
+      padding: 14px;
+      margin-top: 20px;
+      font-family: Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: .6px;
+      font-size: 13px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px 8px 0;
+      color: var(--gold-light);
+      font-size: 28px;
+      font-style: italic;
+      line-height: 1.45;
+    }
+
+    .status {
+      margin-top: 14px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px 10px;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+    }
+
+    .menu-panel {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(8px);
+      z-index: 20;
+      display: none;
+      padding: 28px;
+    }
+
+    .menu-panel.active {
+      display: block;
+    }
+
+    .menu-box {
+      max-width: 420px;
+      margin: 70px auto 0;
+      background: rgba(12,8,4,.92);
+      border: 1px solid rgba(200,145,70,.35);
+      border-radius: 22px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .menu-box a,
+    .menu-box button {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(200,145,70,.45);
+      background: transparent;
+      color: #fff1dc;
+      text-decoration: none;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      z-index: 30;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 380px;
+      background: #120c07;
+      border: 1px solid rgba(200,145,70,.4);
+      border-radius: 20px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .modal-box h3 {
+      color: var(--gold-light);
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    .modal-box p {
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .modal-box input,
+    .modal-box textarea {
+      width: 100%;
+      margin: 8px 0;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid rgba(200,145,70,.35);
+      background: rgba(255,255,255,.06);
+      color: white;
+      font-size: 16px;
+    }
+
+    .modal-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 620px) {
+      .page {
+        margin-top: 24px;
+        margin-bottom: 24px;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 30px 80px rgba(0,0,0,.65);
+      }
+
+      .buttons {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <audio id="bgMusic" src="musica.mp3" loop></audio>
+
+  <div class="page">
+    <div class="top-actions">
+      <div class="music-label">
+        <button class="music-btn" id="musicBtn">♪</button>
+        <span id="musicText">Reproducir<br>música</span>
+      </div>
+
+      <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+
+    <section class="hero">
+      <div class="small-title" id="tipoEvento">NUESTRA BODA</div>
+      <h1 class="couple" id="nombresEvento">Ana & Luis</h1>
+      <p class="subtitle" id="mensajePrincipal">
+        Estamos contando los días para vivir el momento más importante de nuestras vidas.
+      </p>
+    </section>
+
+    <div class="divider">Faltan para nuestro gran día</div>
+
+    <section class="countdown">
+      <div class="time-box"><strong id="days">00</strong><span>DÍAS</span></div>
+      <div class="time-box"><strong id="hours">00</strong><span>HORAS</span></div>
+      <div class="time-box"><strong id="minutes">00</strong><span>MINUTOS</span></div>
+      <div class="time-box"><strong id="seconds">00</strong><span>SEGUNDOS</span></div>
+    </section>
+
+    <div id="loading" class="loading">Cargando invitación...</div>
+
+    <main id="content" style="display:none;">
+      <section class="guest-card">
+        <div class="guest-label">Invitado especial</div>
+        <h2 class="guest-name" id="guestName">Invitado</h2>
+        <div class="guest-extra" id="guestExtra">
+          Gracias por ser parte de este momento tan especial para nosotros.
+        </div>
+      </section>
+
+      <section class="confirm-section">
+        <div class="section-title">CONFIRMA TU ASISTENCIA</div>
+
+        <div class="buttons">
+          <button class="btn primary" onclick="openConfirmModal('Confirmado')">✓ Sí, asistiré</button>
+          <button class="btn" onclick="openConfirmModal('No asistirá')">✕ No podré asistir</button>
+        </div>
+
+        <div class="deadline" id="fechaLimite">
+          Por favor confirma antes de la fecha límite.
+        </div>
+
+        <div class="status" id="currentStatus"></div>
+      </section>
+
+      <section class="details">
+        <div class="divider" style="margin-top:0;">Detalles del evento</div>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <div class="icon">📅</div>
+            <div class="detail-label">Fecha</div>
+            <div class="detail-value" id="fechaEvento">--</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="icon">🕒</div>
+            <div class="detail-label">Hora</div>
+            <div class="detail-value" id="horaEvento">--</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="icon">📍</div>
+            <div class="detail-label">Lugar</div>
+            <div class="detail-value" id="lugarEvento">--</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="icon">👗</div>
+            <div class="detail-label">Vestimenta</div>
+            <div class="detail-value" id="vestimenta">Formal</div>
+          </div>
+        </div>
+
+        <a href="#" target="_blank" class="map-btn" id="mapLink">📍 VER UBICACIÓN EN EL MAPA</a>
+      </section>
+
+      <footer class="footer" id="mensajeFinal">
+        Gracias por acompañarnos<br>en este día tan especial
+      </footer>
+    </main>
+  </div>
+
+  <div class="menu-panel" id="menuPanel">
+    <div class="menu-box">
+      <h2 style="color:#e8c48a;margin-top:0;">Menú</h2>
+      <a href="#content" onclick="closeMenu()">Mi invitación</a>
+      <a href="#detalles" onclick="closeMenu()">Detalles del evento</a>
+      <a href="#" id="menuMapLink" target="_blank">Ver ubicación</a>
+      <button onclick="closeMenu()">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="confirmModal">
+    <div class="modal-box">
+      <h3 id="modalTitle">Confirmar asistencia</h3>
+      <p id="modalText">Confirma la cantidad de personas que asistirán.</p>
+
+      <input type="number" id="personasInput" min="0" placeholder="Personas que asistirán">
+      <textarea id="comentarioInput" rows="3" placeholder="Comentario opcional"></textarea>
+
+      <div class="modal-actions">
+        <button class="btn primary" onclick="submitConfirmation()">Guardar confirmación</button>
+        <button class="btn" onclick="closeConfirmModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz69fn1EObAN6vZclYWriHvBfQDJACm6XbZ5H2v6tdE8IWDz2rIH0VawxayE41v-KQe/exec";
+
+    let invitadoActual = null;
+    let configuracion = {};
+    let selectedStatus = "";
+
+    const DEFAULT_CONFIG = {
+      "Tipo evento": "NUESTRA BODA",
+      "Nombres evento": "Ana & Luis",
+      "Mensaje principal": "Estamos contando los días para vivir el momento más importante de nuestras vidas.",
+      "Fecha evento": "2025-06-25",
+      "Hora evento": "6:00 PM",
+      "Lugar": "Hacienda San José",
+      "Vestimenta": "Formal",
+      "Fecha limite": "20 de Mayo de 2025",
+      "Link mapa": "#",
+      "Mensaje final": "Gracias por acompañarnos<br>en este día tan especial"
+    };
+
+    document.addEventListener("DOMContentLoaded", initApp);
+
+    function initApp() {
+      setupMusic();
+      setupMenu();
+
+      const id = getParam("id");
+
+      if (!id) {
+        showError("No se encontró el ID del invitado en el enlace.");
+        return;
+      }
+
+      obtenerInvitado(id);
+    }
+
+    function getParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    async function obtenerInvitado(id) {
+      try {
+        const url = `${SCRIPT_URL}?action=obtenerInvitado&id=${encodeURIComponent(id)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.ok) {
+          showError(data.mensaje || "No se pudo cargar la invitación.");
+          return;
+        }
+
+        invitadoActual = data.invitado;
+        configuracion = data.configuracion || {};
+
+        renderConfig();
+        renderInvitado();
+        startCountdown();
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("content").style.display = "block";
+
+      } catch (error) {
+        showError("No se pudo conectar con la base de datos.");
+      }
+    }
+
+    function getConfig(key) {
+      return configuracion[key] || DEFAULT_CONFIG[key] || "";
+    }
+
+    function renderConfig() {
+      document.getElementById("tipoEvento").textContent = getConfig("Tipo evento");
+      document.getElementById("nombresEvento").textContent = getConfig("Nombres evento");
+      document.getElementById("mensajePrincipal").textContent = getConfig("Mensaje principal");
+
+      document.getElementById("fechaEvento").textContent = formatDateText(getConfig("Fecha evento"));
+      document.getElementById("horaEvento").textContent = getConfig("Hora evento");
+      document.getElementById("lugarEvento").textContent = getConfig("Lugar");
+      document.getElementById("vestimenta").textContent = getConfig("Vestimenta");
+
+      document.getElementById("fechaLimite").textContent = "Por favor confirma antes del " + getConfig("Fecha limite");
+
+      const mapUrl = getConfig("Link mapa") || "#";
+      document.getElementById("mapLink").href = mapUrl;
+      document.getElementById("menuMapLink").href = mapUrl;
+
+      document.getElementById("mensajeFinal").innerHTML = getConfig("Mensaje final");
+    }
+
+    function renderInvitado() {
+      document.getElementById("guestName").textContent = invitadoActual.nombre || "Invitado especial";
+
+      const personas = invitadoActual.personasInvitadas || 1;
+      document.getElementById("guestExtra").innerHTML =
+        `Gracias por ser parte de este momento tan especial.<br>Invitación para <strong>${personas}</strong> persona(s).`;
+
+      const estado = invitadoActual.estado || "Pendiente";
+      document.getElementById("currentStatus").textContent = "Estado actual: " + estado;
+
+      document.getElementById("personasInput").max = personas;
+      document.getElementById("personasInput").value = personas;
+    }
+
+    function openConfirmModal(status) {
+      selectedStatus = status;
+
+      const maxPersonas = Number(invitadoActual.personasInvitadas) || 1;
+
+      document.getElementById("confirmModal").classList.add("active");
+
+      if (status === "Confirmado") {
+        document.getElementById("modalTitle").textContent = "Confirmar asistencia";
+        document.getElementById("modalText").textContent = "Indica cuántas personas asistirán.";
+        document.getElementById("personasInput").style.display = "block";
+        document.getElementById("personasInput").value = maxPersonas;
+      } else {
+        document.getElementById("modalTitle").textContent = "No podré asistir";
+        document.getElementById("modalText").textContent = "Lamentamos que no puedas acompañarnos. Puedes dejar un comentario opcional.";
+        document.getElementById("personasInput").style.display = "none";
+        document.getElementById("personasInput").value = 0;
+      }
+    }
+
+    function closeConfirmModal() {
+      document.getElementById("confirmModal").classList.remove("active");
+    }
+
+    async function submitConfirmation() {
+      if (!invitadoActual || !selectedStatus) return;
+
+      const personas = document.getElementById("personasInput").value || 0;
+      const comentario = document.getElementById("comentarioInput").value || "";
+
+      const btns = document.querySelectorAll(".modal .btn");
+      btns.forEach(btn => btn.disabled = true);
+
+      try {
+        const url =
+          `${SCRIPT_URL}?action=confirmarAsistencia` +
+          `&id=${encodeURIComponent(invitadoActual.id)}` +
+          `&estado=${encodeURIComponent(selectedStatus)}` +
+          `&personas=${encodeURIComponent(personas)}` +
+          `&comentario=${encodeURIComponent(comentario)}`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.ok) {
+          invitadoActual.estado = selectedStatus;
+          invitadoActual.personasConfirmadas = data.invitado.personasConfirmadas;
+
+          document.getElementById("currentStatus").textContent =
+            "Estado actual: " + selectedStatus;
+
+          closeConfirmModal();
+          alert("Gracias, tu respuesta fue guardada correctamente.");
+        } else {
+          alert(data.mensaje || "No se pudo guardar la confirmación.");
+        }
+
+      } catch (error) {
+        alert("No se pudo conectar con el servidor.");
+      } finally {
+        btns.forEach(btn => btn.disabled = false);
+      }
+    }
+
+    function startCountdown() {
+      const fecha = getConfig("Fecha evento");
+      const eventDate = new Date(fecha);
+
+      if (isNaN(eventDate.getTime())) return;
+
+      function update() {
+        const now = new Date();
+        const diff = eventDate - now;
+
+        if (diff <= 0) {
+          document.getElementById("days").textContent = "00";
+          document.getElementById("hours").textContent = "00";
+          document.getElementById("minutes").textContent = "00";
+          document.getElementById("seconds").textContent = "00";
+          return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").textContent = String(d).padStart(2, "0");
+        document.getElementById("hours").textContent = String(h).padStart(2, "0");
+        document.getElementById("minutes").textContent = String(m).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(s).padStart(2, "0");
+      }
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    function setupMusic() {
+      const audio = document.getElementById("bgMusic");
+      const btn = document.getElementById("musicBtn");
+      const text = document.getElementById("musicText");
+      let playing = false;
+
+      btn.addEventListener("click", async () => {
+        try {
+          if (!playing) {
+            await audio.play();
+            playing = true;
+            btn.textContent = "❚❚";
+            text.innerHTML = "Pausar<br>música";
+          } else {
+            audio.pause();
+            playing = false;
+            btn.textContent = "♪";
+            text.innerHTML = "Reproducir<br>música";
+          }
+        } catch (e) {
+          alert("Toca nuevamente para reproducir la música.");
+        }
+      });
+    }
+
+    function setupMenu() {
+      document.getElementById("menuBtn").addEventListener("click", () => {
+        document.getElementById("menuPanel").classList.add("active");
+      });
+    }
+
+    function closeMenu() {
+      document.getElementById("menuPanel").classList.remove("active");
+    }
+
+    function showError(msg) {
+      document.getElementById("loading").innerHTML = msg;
+    }
+
+    function formatDateText(value) {
+      if (!value) return "--";
+
+      const date = new Date(value);
+      if (isNaN(date.getTime())) return value;
+
+      return date.toLocaleDateString("es-GT", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      });
+    }
+  </script>
+</body>
+</html>
