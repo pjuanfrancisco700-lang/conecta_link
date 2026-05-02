@@ -443,13 +443,13 @@
 </head>
 
 <body>
-  <audio id="bgMusic" src="musica.mp3" loop></audio>
+  <audio id="bgMusic" src="musica.mp3" loop autoplay preload="auto"></audio>
 
   <div class="page">
     <div class="top-actions">
       <div class="music-label">
-        <button class="music-btn" id="musicBtn">♪</button>
-        <span id="musicText">Reproducir<br>música</span>
+        <button class="music-btn" id="musicBtn">❚❚</button>
+        <span id="musicText">Pausar<br>música</span>
       </div>
 
       <button class="menu-btn" id="menuBtn">☰</button>
@@ -837,20 +837,54 @@
       const audio = document.getElementById("bgMusic");
       const btn = document.getElementById("musicBtn");
       const text = document.getElementById("musicText");
-      let playing = false;
+      let playing = true;
 
-      btn.addEventListener("click", async () => {
+      function setPlayingUI() {
+        playing = true;
+        btn.textContent = "❚❚";
+        text.innerHTML = "Pausar<br>música";
+      }
+
+      function setPausedUI() {
+        playing = false;
+        btn.textContent = "♪";
+        text.innerHTML = "Reproducir<br>música";
+      }
+
+      async function tryAutoPlay() {
         try {
-          if (!playing) {
-            await audio.play();
-            playing = true;
-            btn.textContent = "❚❚";
-            text.innerHTML = "Pausar<br>música";
-          } else {
+          audio.muted = false;
+          await audio.play();
+          setPlayingUI();
+        } catch (e) {
+          setPausedUI();
+
+          const unlockAudio = async () => {
+            try {
+              await audio.play();
+              setPlayingUI();
+              document.removeEventListener("click", unlockAudio);
+              document.removeEventListener("touchstart", unlockAudio);
+            } catch (error) {}
+          };
+
+          document.addEventListener("click", unlockAudio, { once: true });
+          document.addEventListener("touchstart", unlockAudio, { once: true });
+        }
+      }
+
+      tryAutoPlay();
+
+      btn.addEventListener("click", async (e) => {
+        e.stopPropagation();
+
+        try {
+          if (playing) {
             audio.pause();
-            playing = false;
-            btn.textContent = "♪";
-            text.innerHTML = "Reproducir<br>música";
+            setPausedUI();
+          } else {
+            await audio.play();
+            setPlayingUI();
           }
         } catch (e) {
           alert("Toca nuevamente para reproducir la música.");
