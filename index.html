@@ -41,14 +41,10 @@
 
     body {
       background-image:
-        linear-gradient(
-          to bottom,
-          rgba(248,246,241,.12),
-          rgba(238,232,222,.22)
-        ),
+        linear-gradient(to bottom, rgba(242,245,249,.38), rgba(232,237,244,.82)),
         url("fondo-boda.jpg");
       background-size: cover;
-      background-position: center top;
+      background-position: center;
       background-attachment: scroll;
     }
 
@@ -59,14 +55,9 @@
       min-height: 100vh;
       padding: 22px 18px 40px;
       background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,.10),
-          rgba(248,246,241,.18) 42%,
-          rgba(238,232,222,.24)
-        );
-      -webkit-backdrop-filter: blur(1.5px);
-      backdrop-filter: blur(1.5px);
+        linear-gradient(180deg, rgba(255,255,255,.68), rgba(246,247,250,.84)),
+        rgba(255,255,255,.36);
+      backdrop-filter: none;
       position: relative;
     }
 
@@ -79,8 +70,8 @@
 
     .music-btn,
     .menu-btn {
-      border: 1px solid rgba(255,255,255,.42);
-      background: rgba(255,255,255,.48);
+      border: 1px solid rgba(102,118,148,.35);
+      background: rgba(255,255,255,.72);
       color: var(--blue-deep);
       width: 52px;
       height: 52px;
@@ -89,9 +80,7 @@
       cursor: pointer;
       display: grid;
       place-items: center;
-      box-shadow: 0 12px 30px rgba(49,63,86,.07);
-      -webkit-backdrop-filter: blur(9px);
-      backdrop-filter: blur(9px);
+      box-shadow: 0 12px 28px rgba(63,83,114,.12);
     }
 
     .music-label {
@@ -111,14 +100,12 @@
       padding: 28px 10px 18px;
       margin: 0 0 18px;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,.42), transparent 44%),
-        radial-gradient(circle at bottom right, rgba(199,169,110,.10), transparent 46%),
-        linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.28));
-      border: 1px solid rgba(255,255,255,.38);
+        radial-gradient(circle at top left, rgba(102,118,148,.08), transparent 42%),
+        radial-gradient(circle at bottom right, rgba(199,169,110,.10), transparent 42%),
+        rgba(255,255,255,.50);
+      border: 1px solid rgba(102,118,148,.20);
       border-radius: 28px;
-      box-shadow: 0 16px 42px rgba(49,63,86,.075);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .small-title {
@@ -170,7 +157,7 @@
       content: "";
       flex: 1;
       height: 1px;
-      background: linear-gradient(to right, transparent, rgba(102,118,148,.30), transparent);
+      background: linear-gradient(to right, transparent, rgba(102,118,148,.55), transparent);
     }
 
     .countdown {
@@ -181,15 +168,13 @@
       margin-bottom: 30px;
       padding: 16px 10px;
       border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255,255,255,.48), rgba(255,255,255,.32));
-      border: 1px solid rgba(255,255,255,.40);
-      box-shadow: 0 14px 34px rgba(49,63,86,.065);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,.54);
+      border: 1px solid rgba(102,118,148,.18);
+      box-shadow: 0 14px 32px rgba(49,63,86,.08);
     }
 
     .time-box {
-      border-right: 1px solid rgba(102,118,148,.13);
+      border-right: 1px solid rgba(102,118,148,.22);
     }
 
     .time-box:last-child {
@@ -214,15 +199,13 @@
 
     .guest-card {
       background:
-        linear-gradient(180deg, rgba(255,255,255,.50), rgba(255,255,255,.31));
-      border: 1px solid rgba(255,255,255,.38);
+        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.46));
+      border: 1px solid rgba(102,118,148,.20);
       border-radius: 28px;
       padding: 28px 16px;
       text-align: center;
       margin: 10px 0 24px;
-      box-shadow: 0 16px 42px rgba(49,63,86,.075);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .guest-label {
@@ -273,18 +256,16 @@
     }
 
     .btn {
-      border: 1px solid rgba(255,255,255,.42);
+      border: 1px solid rgba(102,118,148,.42);
       border-radius: 14px;
       min-height: 54px;
-      background: rgba(255,255,255,.42);
+      background: rgba(255,255,255,.56);
       color: var(--blue-deep);
       font-size: 16px;
       font-family: "Montserrat", Arial, sans-serif;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 10px 24px rgba(49,63,86,.06);
-      -webkit-backdrop-filter: blur(7px);
-      backdrop-filter: blur(7px);
+      box-shadow: 0 10px 24px rgba(49,63,86,.08);
     }
 
     .btn:disabled {
@@ -308,15 +289,13 @@
 
     .details {
       background:
-        linear-gradient(180deg, rgba(255,255,255,.48), rgba(255,255,255,.30));
-      border: 1px solid rgba(255,255,255,.38);
+        linear-gradient(180deg, rgba(255,255,255,.66), rgba(255,255,255,.44));
+      border: 1px solid rgba(102,118,148,.20);
       border-radius: 28px;
       padding: 22px 14px;
       margin-bottom: 26px;
       scroll-margin-top: 20px;
-      box-shadow: 0 16px 42px rgba(49,63,86,.075);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .details-grid {
@@ -327,7 +306,7 @@
     }
 
     .detail-item {
-      border-right: 1px solid rgba(102,118,148,.12);
+      border-right: 1px solid rgba(102,118,148,.18);
       padding: 8px;
     }
 
@@ -363,10 +342,10 @@
     .map-btn {
       display: block;
       text-align: center;
-      border: 1px solid rgba(255,255,255,.40);
+      border: 1px solid rgba(102,118,148,.38);
       border-radius: 14px;
       color: var(--blue-deep);
-      background: rgba(255,255,255,.40);
+      background: rgba(255,255,255,.52);
       text-decoration: none;
       padding: 14px;
       margin-top: 20px;
@@ -374,25 +353,21 @@
       font-weight: 800;
       letter-spacing: .8px;
       font-size: 12px;
-      box-shadow: 0 10px 24px rgba(49,63,86,.06);
-      -webkit-backdrop-filter: blur(7px);
-      backdrop-filter: blur(7px);
+      box-shadow: 0 10px 24px rgba(49,63,86,.08);
     }
 
 
     .special-details {
       background:
-        linear-gradient(180deg, rgba(255,255,255,.48), rgba(255,255,255,.30));
-      border: 1px solid rgba(255,255,255,.38);
+        linear-gradient(180deg, rgba(255,255,255,.68), rgba(255,255,255,.46));
+      border: 1px solid rgba(102,118,148,.20);
       border-radius: 28px;
       padding: 22px 18px;
       margin: 0 0 26px;
       text-align: center;
-      box-shadow: 0 16px 42px rgba(49,63,86,.075);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
       scroll-margin-top: 20px;
       display: none;
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
     }
 
     .special-icon-wrap {
@@ -402,9 +377,9 @@
       margin: 0 auto 14px;
       display: grid;
       place-items: center;
-      background: rgba(255,255,255,.40);
-      border: 1px solid rgba(255,255,255,.38);
-      box-shadow: 0 12px 28px rgba(49,63,86,.06);
+      background: rgba(255,255,255,.54);
+      border: 1px solid rgba(102,118,148,.22);
+      box-shadow: 0 12px 28px rgba(49,63,86,.10);
       overflow: hidden;
     }
 
@@ -762,7 +737,7 @@
         margin-bottom: 24px;
         border-radius: 28px;
         overflow: hidden;
-        box-shadow: 0 26px 70px rgba(49,63,86,.12);
+        box-shadow: 0 30px 80px rgba(49,63,86,.24);
       }
 
       .buttons {
