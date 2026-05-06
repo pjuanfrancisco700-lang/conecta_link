@@ -12,15 +12,15 @@
       --blue-deep: #3f5372;
       --blue-soft: #8d99ad;
       --paper: #f8f6f1;
-      --paper-soft: rgba(255, 255, 255, 0.58);
+      --paper-soft: rgba(255, 255, 255, 0.82);
       --ink: #3f4f68;
       --muted: #778197;
-      --line: rgba(102, 118, 148, 0.14);
-      --shadow: rgba(49, 63, 86, 0.10);
+      --line: rgba(102, 118, 148, 0.28);
+      --shadow: rgba(49, 63, 86, 0.18);
       --gold: #c7a96e;
       --gold-light: #e8d9b7;
       --dark: #080604;
-      --glass: rgba(255, 255, 255, 0.42);
+      --glass: rgba(255, 255, 255, 0.58);
       --text: #3f4f68;
     }
 
@@ -41,7 +41,7 @@
 
     body {
       background-image:
-        linear-gradient(to bottom, rgba(242,245,249,.18), rgba(232,237,244,.42)),
+        linear-gradient(to bottom, rgba(242,245,249,.38), rgba(232,237,244,.82)),
         url("fondo-boda.jpg");
       background-size: cover;
       background-position: center;
@@ -55,10 +55,9 @@
       min-height: 100vh;
       padding: 22px 18px 40px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.34), rgba(246,247,250,.48)),
-        rgba(255,255,255,.16);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+        linear-gradient(180deg, rgba(255,255,255,.68), rgba(246,247,250,.84)),
+        rgba(255,255,255,.36);
+      backdrop-filter: none;
       position: relative;
     }
 
@@ -71,10 +70,8 @@
 
     .music-btn,
     .menu-btn {
-      border: 1px solid rgba(255,255,255,.34);
-      background: rgba(255,255,255,.46);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(102,118,148,.35);
+      background: rgba(255,255,255,.72);
       color: var(--blue-deep);
       width: 52px;
       height: 52px;
@@ -83,7 +80,7 @@
       cursor: pointer;
       display: grid;
       place-items: center;
-      box-shadow: 0 14px 34px rgba(49,63,86,.09);
+      box-shadow: 0 12px 28px rgba(63,83,114,.12);
     }
 
     .music-label {
@@ -105,12 +102,10 @@
       background:
         radial-gradient(circle at top left, rgba(102,118,148,.08), transparent 42%),
         radial-gradient(circle at bottom right, rgba(199,169,110,.10), transparent 42%),
-        rgba(255,255,255,.36);
-      border: 1px solid rgba(255,255,255,.30);
+        rgba(255,255,255,.50);
+      border: 1px solid rgba(102,118,148,.20);
       border-radius: 28px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 18px 48px rgba(49,63,86,.08);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .small-title {
@@ -173,15 +168,13 @@
       margin-bottom: 30px;
       padding: 16px 10px;
       border-radius: 24px;
-      background: rgba(255,255,255,.34);
-      border: 1px solid rgba(255,255,255,.28);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 14px 36px rgba(49,63,86,.07);
+      background: rgba(255,255,255,.54);
+      border: 1px solid rgba(102,118,148,.18);
+      box-shadow: 0 14px 32px rgba(49,63,86,.08);
     }
 
     .time-box {
-      border-right: 1px solid rgba(102,118,148,.12);
+      border-right: 1px solid rgba(102,118,148,.22);
     }
 
     .time-box:last-child {
@@ -206,15 +199,13 @@
 
     .guest-card {
       background:
-        linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.28));
-      border: 1px solid rgba(255,255,255,.30);
+        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.46));
+      border: 1px solid rgba(102,118,148,.20);
       border-radius: 28px;
       padding: 28px 16px;
       text-align: center;
       margin: 10px 0 24px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 18px 48px rgba(49,63,86,.08);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .guest-label {
@@ -265,18 +256,16 @@
     }
 
     .btn {
-      border: 1px solid rgba(255,255,255,.32);
+      border: 1px solid rgba(102,118,148,.42);
       border-radius: 14px;
       min-height: 54px;
-      background: rgba(255,255,255,.38);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.56);
       color: var(--blue-deep);
       font-size: 16px;
       font-family: "Montserrat", Arial, sans-serif;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 10px 26px rgba(49,63,86,.07);
+      box-shadow: 0 10px 24px rgba(49,63,86,.08);
     }
 
     .btn:disabled {
@@ -300,15 +289,13 @@
 
     .details {
       background:
-        linear-gradient(180deg, rgba(255,255,255,.44), rgba(255,255,255,.26));
-      border: 1px solid rgba(255,255,255,.30);
+        linear-gradient(180deg, rgba(255,255,255,.66), rgba(255,255,255,.44));
+      border: 1px solid rgba(102,118,148,.20);
       border-radius: 28px;
       padding: 22px 14px;
       margin-bottom: 26px;
       scroll-margin-top: 20px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 18px 48px rgba(49,63,86,.08);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .details-grid {
@@ -319,7 +306,7 @@
     }
 
     .detail-item {
-      border-right: 1px solid rgba(102,118,148,.10);
+      border-right: 1px solid rgba(102,118,148,.18);
       padding: 8px;
     }
 
@@ -355,12 +342,10 @@
     .map-btn {
       display: block;
       text-align: center;
-      border: 1px solid rgba(255,255,255,.32);
+      border: 1px solid rgba(102,118,148,.38);
       border-radius: 14px;
       color: var(--blue-deep);
-      background: rgba(255,255,255,.36);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.52);
       text-decoration: none;
       padding: 14px;
       margin-top: 20px;
@@ -368,21 +353,19 @@
       font-weight: 800;
       letter-spacing: .8px;
       font-size: 12px;
-      box-shadow: 0 10px 26px rgba(49,63,86,.07);
+      box-shadow: 0 10px 24px rgba(49,63,86,.08);
     }
 
 
     .special-details {
       background:
-        linear-gradient(180deg, rgba(255,255,255,.44), rgba(255,255,255,.26));
-      border: 1px solid rgba(255,255,255,.30);
+        linear-gradient(180deg, rgba(255,255,255,.68), rgba(255,255,255,.46));
+      border: 1px solid rgba(102,118,148,.20);
       border-radius: 28px;
       padding: 22px 18px;
       margin: 0 0 26px;
       text-align: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 18px 48px rgba(49,63,86,.08);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
       scroll-margin-top: 20px;
       display: none;
     }
@@ -394,11 +377,9 @@
       margin: 0 auto 14px;
       display: grid;
       place-items: center;
-      background: rgba(255,255,255,.36);
-      border: 1px solid rgba(255,255,255,.30);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 12px 30px rgba(49,63,86,.08);
+      background: rgba(255,255,255,.54);
+      border: 1px solid rgba(102,118,148,.22);
+      box-shadow: 0 12px 28px rgba(49,63,86,.10);
       overflow: hidden;
     }
 
