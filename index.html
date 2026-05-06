@@ -333,6 +333,123 @@
       line-height: 1.5;
     }
 
+    .splash-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at center, rgba(200,145,70,.16), transparent 34%),
+        #050505;
+      transition: opacity .45s ease, visibility .45s ease;
+    }
+
+    body.app-ready .splash-loader {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    body:not(.app-ready) .page {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .splash-envelope {
+      width: 118px;
+      height: 118px;
+      border-radius: 30px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #ff735d, #d94a36);
+      box-shadow:
+        0 22px 55px rgba(0,0,0,.42),
+        0 0 0 1px rgba(255,255,255,.08) inset;
+      overflow: hidden;
+      animation: envelopePulse 1.65s ease-in-out infinite;
+    }
+
+    .splash-envelope::before {
+      content: "";
+      position: absolute;
+      width: 86px;
+      height: 66px;
+      top: 22px;
+      left: 16px;
+      border-radius: 8px 8px 4px 4px;
+      background: linear-gradient(145deg, #ffd572, #f2b94f);
+      clip-path: polygon(0 0, 100% 0, 100% 70%, 58% 100%, 42% 100%, 0 70%);
+      z-index: 1;
+      box-shadow: 0 10px 18px rgba(0,0,0,.16);
+    }
+
+    .splash-envelope::after {
+      content: "";
+      position: absolute;
+      inset: 48px 0 0;
+      background: linear-gradient(145deg, #f56650, #d94a36);
+      clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+      z-index: 2;
+    }
+
+    .splash-lines {
+      position: absolute;
+      top: 42px;
+      left: 45px;
+      width: 44px;
+      height: 20px;
+      z-index: 3;
+    }
+
+    .splash-lines span {
+      display: block;
+      height: 7px;
+      border-radius: 999px;
+      background: #080604;
+      margin-bottom: 8px;
+      opacity: .92;
+    }
+
+    .splash-lines span:first-child {
+      width: 28px;
+    }
+
+    .splash-lines span:last-child {
+      width: 52px;
+    }
+
+    .splash-error {
+      max-width: 320px;
+      padding: 0 22px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      color: var(--muted);
+      line-height: 1.45;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .splash-error-title {
+      color: var(--gold-light);
+      font-weight: 800;
+      font-size: 21px;
+      margin-top: 26px;
+      line-height: 1.35;
+      text-align: center;
+      letter-spacing: .2px;
+    }
+
+    @keyframes envelopePulse {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-6px) scale(1.035); }
+    }
+
     .menu-panel {
       position: fixed;
       inset: 0;
@@ -445,6 +562,12 @@
 <body>
   <audio id="bgMusic" src="musica.mp3" loop autoplay preload="auto"></audio>
 
+  <div id="splashLoader" class="splash-loader" aria-label="Cargando invitación">
+    <div class="splash-envelope">
+      <div class="splash-lines"><span></span><span></span></div>
+    </div>
+  </div>
+
   <div class="page">
     <div class="top-actions">
       <div class="music-label">
@@ -456,11 +579,9 @@
     </div>
 
     <section class="hero">
-      <div class="small-title" id="tipoEvento">NUESTRA BODA</div>
-      <h1 class="couple" id="nombresEvento">Ana & Luis</h1>
-      <p class="subtitle" id="mensajePrincipal">
-        Estamos contando los días para vivir el momento más importante de nuestras vidas.
-      </p>
+      <div class="small-title" id="tipoEvento"></div>
+      <h1 class="couple" id="nombresEvento"></h1>
+      <p class="subtitle" id="mensajePrincipal"></p>
     </section>
 
     <div class="divider">Faltan para nuestro gran día</div>
@@ -472,7 +593,7 @@
       <div class="time-box"><strong id="seconds">00</strong><span>SEGUNDOS</span></div>
     </section>
 
-    <div id="loading" class="loading">Cargando invitación...</div>
+    <div id="loading" class="loading" style="display:none;"></div>
 
     <main id="content" style="display:none;">
       <section class="guest-card">
@@ -571,7 +692,7 @@
 
     const DEFAULT_CONFIG = {
       "Tipo evento": "NUESTRA BODA",
-      "Nombres evento": "Ana & Luis",
+      "Nombres evento": "Invitación especial",
       "Mensaje principal": "Estamos contando los días para vivir el momento más importante de nuestras vidas.",
       "Fecha evento": "2025-06-25",
       "Hora evento": "6:00 PM",
@@ -634,6 +755,7 @@
 
         document.getElementById("loading").style.display = "none";
         document.getElementById("content").style.display = "block";
+        document.body.classList.add("app-ready");
 
       } catch (error) {
         showError("No se pudo conectar con la base de datos. Revisa el enlace del Apps Script o la conexión.");
@@ -909,10 +1031,21 @@
     }
 
     function showError(msg) {
-      document.getElementById("loading").innerHTML = `
-        <div style="color:#e8c48a;font-size:18px;margin-bottom:8px;">No pudimos cargar la invitación</div>
-        <div>${msg}</div>
-      `;
+      const splash = document.getElementById("splashLoader");
+
+      if (splash) {
+        splash.innerHTML = `
+          <div class="splash-error">
+            <div class="splash-envelope">
+              <div class="splash-lines"><span></span><span></span></div>
+            </div>
+            <div class="splash-error-title">Invitación no disponible</div>
+          </div>
+        `;
+      }
+
+      const loading = document.getElementById("loading");
+      if (loading) loading.style.display = "none";
 
       document.getElementById("content").style.display = "none";
     }
