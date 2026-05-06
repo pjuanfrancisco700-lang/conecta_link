@@ -391,12 +391,77 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at center, rgba(200,145,70,.16), transparent 34%),
-        #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      /* =====================================================
+         PANTALLA DE CARGA / PORTADA CANVA
+         Cambia aquí la imagen de fondo diseñada en Canva.
+         Sube tu imagen al repositorio con este nombre:
+         loading-bg.jpg
+      ===================================================== */
+      background-image: url('loading-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #f5f2ec;
+
       transition: opacity .45s ease, visibility .45s ease;
+    }
+
+    .splash-loader::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,.015);
+      pointer-events: none;
+    }
+
+    .splash-content {
+      position: relative;
+      z-index: 1;
+      width: min(74vw, 330px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 13px;
+      transform: translateY(22vh);
+      padding: 0;
+    }
+
+    .splash-loading-text {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      font-size: clamp(11px, 3.2vw, 14px);
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      line-height: 1.35;
+      color: #707b99;
+      text-transform: uppercase;
+      text-shadow: 0 1px 8px rgba(255,255,255,.65);
+      white-space: nowrap;
+    }
+
+    .splash-progress {
+      width: min(270px, 70vw);
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(112,123,153,.12);
+      border: 1px solid rgba(112,123,153,.55);
+      box-shadow: 0 1px 6px rgba(255,255,255,.45) inset;
+    }
+
+    .splash-progress-bar {
+      width: 42%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(112,123,153,.45), rgba(112,123,153,.92), rgba(112,123,153,.45));
+      animation: splashProgress 1.75s ease-in-out infinite;
     }
 
     body.app-ready .splash-loader {
@@ -497,6 +562,20 @@
       line-height: 1.35;
       text-align: center;
       letter-spacing: .2px;
+    }
+
+    @keyframes splashProgress {
+      0% {
+        transform: translateX(-120%);
+        opacity: .45;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(250%);
+        opacity: .45;
+      }
     }
 
     @keyframes envelopePulse {
@@ -617,8 +696,11 @@
   <audio id="bgMusic" src="musica.mp3" loop autoplay preload="auto"></audio>
 
   <div id="splashLoader" class="splash-loader" aria-label="Cargando invitación">
-    <div class="splash-envelope">
-      <div class="splash-lines"><span></span><span></span></div>
+    <div class="splash-content">
+      <p class="splash-loading-text">CARGANDO NUESTRA INVITACIÓN…</p>
+      <div class="splash-progress" aria-hidden="true">
+        <div class="splash-progress-bar"></div>
+      </div>
     </div>
   </div>
 
