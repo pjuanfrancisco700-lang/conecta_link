@@ -8,12 +8,20 @@
 
   <style>
     :root {
-      --gold: #c89146;
-      --gold-light: #e8c48a;
+      --blue: #667694;
+      --blue-deep: #3f5372;
+      --blue-soft: #8d99ad;
+      --paper: #f8f6f1;
+      --paper-soft: rgba(255, 255, 255, 0.82);
+      --ink: #3f4f68;
+      --muted: #778197;
+      --line: rgba(102, 118, 148, 0.28);
+      --shadow: rgba(49, 63, 86, 0.18);
+      --gold: #c7a96e;
+      --gold-light: #e8d9b7;
       --dark: #080604;
-      --glass: rgba(0, 0, 0, 0.55);
-      --text: #fff8ec;
-      --muted: #d7c8b5;
+      --glass: rgba(255, 255, 255, 0.58);
+      --text: #3f4f68;
     }
 
     * {
@@ -25,15 +33,15 @@
       margin: 0;
       padding: 0;
       min-height: 100%;
-      font-family: Georgia, 'Times New Roman', serif;
-      background: #050505;
-      color: var(--text);
+      font-family: "Cormorant Garamond", Georgia, 'Times New Roman', serif;
+      background: #eef1f6;
+      color: var(--ink);
       overflow-x: hidden;
     }
 
     body {
       background-image:
-        linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.95)),
+        linear-gradient(to bottom, rgba(242,245,249,.38), rgba(232,237,244,.82)),
         url("fondo-boda.jpg");
       background-size: cover;
       background-position: center;
@@ -46,8 +54,10 @@
       margin: 0 auto;
       min-height: 100vh;
       padding: 22px 18px 40px;
-      background: linear-gradient(to bottom, rgba(0,0,0,.30), rgba(0,0,0,.84));
-      backdrop-filter: blur(2px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.68), rgba(246,247,250,.84)),
+        rgba(255,255,255,.36);
+      backdrop-filter: none;
       position: relative;
     }
 
@@ -55,75 +65,90 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 42px;
+      margin-bottom: 36px;
     }
 
     .music-btn,
     .menu-btn {
-      border: 1px solid rgba(232,196,138,.55);
-      background: rgba(0,0,0,.35);
-      color: var(--gold-light);
-      width: 54px;
-      height: 54px;
+      border: 1px solid rgba(102,118,148,.35);
+      background: rgba(255,255,255,.72);
+      color: var(--blue-deep);
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      font-size: 23px;
+      font-size: 22px;
       cursor: pointer;
       display: grid;
       place-items: center;
-      box-shadow: 0 8px 22px rgba(0,0,0,.25);
+      box-shadow: 0 12px 28px rgba(63,83,114,.12);
     }
 
     .music-label {
       display: flex;
       gap: 12px;
       align-items: center;
-      font-family: Arial, sans-serif;
-      color: #f5ead8;
-      font-size: 14px;
+      font-family: "Montserrat", Arial, sans-serif;
+      color: var(--blue-deep);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
     }
 
     .hero {
       text-align: center;
-      padding: 26px 8px 16px;
+      padding: 28px 10px 18px;
+      margin: 0 0 18px;
+      background:
+        radial-gradient(circle at top left, rgba(102,118,148,.08), transparent 42%),
+        radial-gradient(circle at bottom right, rgba(199,169,110,.10), transparent 42%),
+        rgba(255,255,255,.50);
+      border: 1px solid rgba(102,118,148,.20);
+      border-radius: 28px;
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .small-title {
-      letter-spacing: 3px;
-      color: var(--gold-light);
-      font-family: Arial, sans-serif;
+      letter-spacing: 2.8px;
+      color: var(--blue-soft);
+      font-family: "Montserrat", Arial, sans-serif;
       font-weight: 700;
       font-size: 13px;
       margin-bottom: 8px;
+      text-transform: uppercase;
     }
 
     .couple {
-      font-size: 58px;
+      font-family: "Great Vibes", "Parisienne", "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(54px, 13vw, 74px);
       line-height: 0.95;
-      color: var(--gold-light);
-      font-style: italic;
+      color: var(--blue-deep);
+      font-style: normal;
       font-weight: 400;
-      text-shadow: 0 8px 25px rgba(0,0,0,.45);
+      text-shadow: 0 6px 20px rgba(102,118,148,.18);
       margin: 0 0 18px;
     }
 
     .subtitle {
-      color: #f7ead9;
-      font-size: 17px;
-      line-height: 1.45;
-      max-width: 350px;
+      color: var(--muted);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.65;
+      max-width: 370px;
       margin: 0 auto;
+      letter-spacing: .2px;
     }
 
     .divider {
       display: flex;
       align-items: center;
       gap: 14px;
-      color: var(--gold);
+      color: var(--blue);
       margin: 26px 0 18px;
-      font-family: Arial, sans-serif;
+      font-family: "Montserrat", Arial, sans-serif;
       font-weight: 700;
       letter-spacing: 2px;
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
     }
 
@@ -132,7 +157,7 @@
       content: "";
       flex: 1;
       height: 1px;
-      background: linear-gradient(to right, transparent, rgba(200,145,70,.8), transparent);
+      background: linear-gradient(to right, transparent, rgba(102,118,148,.55), transparent);
     }
 
     .countdown {
@@ -141,10 +166,15 @@
       gap: 8px;
       text-align: center;
       margin-bottom: 30px;
+      padding: 16px 10px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.54);
+      border: 1px solid rgba(102,118,148,.18);
+      box-shadow: 0 14px 32px rgba(49,63,86,.08);
     }
 
     .time-box {
-      border-right: 1px solid rgba(200,145,70,.5);
+      border-right: 1px solid rgba(102,118,148,.22);
     }
 
     .time-box:last-child {
@@ -153,45 +183,52 @@
 
     .time-box strong {
       display: block;
-      font-size: 39px;
+      font-size: 36px;
       font-weight: 400;
-      color: #f3d5a2;
+      color: var(--blue-deep);
+      line-height: 1;
     }
 
     .time-box span {
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      color: var(--gold-light);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 10px;
+      color: var(--blue-soft);
       font-weight: 700;
+      letter-spacing: .7px;
     }
 
     .guest-card {
-      background: rgba(0,0,0,.42);
-      border-top: 1px solid rgba(200,145,70,.26);
-      border-bottom: 1px solid rgba(200,145,70,.26);
-      padding: 26px 14px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.46));
+      border: 1px solid rgba(102,118,148,.20);
+      border-radius: 28px;
+      padding: 28px 16px;
       text-align: center;
       margin: 10px 0 24px;
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .guest-label {
-      font-style: italic;
-      color: var(--gold-light);
-      font-size: 24px;
+      font-family: "Great Vibes", "Parisienne", "Cormorant Garamond", Georgia, serif;
+      color: var(--blue);
+      font-size: 31px;
       margin-bottom: 8px;
     }
 
     .guest-name {
-      font-size: 42px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 43px;
       line-height: 1.05;
       margin: 0;
-      color: #fff;
+      color: var(--blue-deep);
+      font-weight: 500;
     }
 
     .guest-extra {
       color: var(--muted);
-      font-size: 16px;
-      line-height: 1.45;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
       margin-top: 12px;
     }
 
@@ -201,12 +238,13 @@
     }
 
     .section-title {
-      font-family: Arial, sans-serif;
-      color: var(--gold);
+      font-family: "Montserrat", Arial, sans-serif;
+      color: var(--blue);
       letter-spacing: 2px;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 800;
       margin-bottom: 16px;
+      text-transform: uppercase;
     }
 
     .buttons {
@@ -218,14 +256,16 @@
     }
 
     .btn {
-      border: 1px solid var(--gold);
-      border-radius: 9px;
+      border: 1px solid rgba(102,118,148,.42);
+      border-radius: 14px;
       min-height: 54px;
-      background: transparent;
-      color: #fff5e7;
-      font-size: 17px;
-      font-family: Georgia, 'Times New Roman', serif;
+      background: rgba(255,255,255,.56);
+      color: var(--blue-deep);
+      font-size: 16px;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-weight: 700;
       cursor: pointer;
+      box-shadow: 0 10px 24px rgba(49,63,86,.08);
     }
 
     .btn:disabled {
@@ -234,25 +274,28 @@
     }
 
     .btn.primary {
-      background: linear-gradient(135deg, #b87d32, #d6a254);
+      background: linear-gradient(135deg, #667694, #3f5372);
       color: white;
       border: none;
     }
 
     .deadline {
       color: var(--muted);
-      font-size: 14px;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 13px;
       margin-top: 14px;
       line-height: 1.4;
     }
 
     .details {
-      background: rgba(0,0,0,.38);
-      border: 1px solid rgba(200,145,70,.22);
-      border-radius: 18px;
-      padding: 20px 14px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.66), rgba(255,255,255,.44));
+      border: 1px solid rgba(102,118,148,.20);
+      border-radius: 28px;
+      padding: 22px 14px;
       margin-bottom: 26px;
       scroll-margin-top: 20px;
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
     }
 
     .details-grid {
@@ -263,7 +306,7 @@
     }
 
     .detail-item {
-      border-right: 1px solid rgba(200,145,70,.25);
+      border-right: 1px solid rgba(102,118,148,.18);
       padding: 8px;
     }
 
@@ -273,53 +316,56 @@
     }
 
     .icon {
-      color: var(--gold-light);
-      font-size: 26px;
+      color: var(--blue);
+      font-size: 24px;
       margin-bottom: 8px;
+      filter: grayscale(1);
+      opacity: .78;
     }
 
     .detail-label {
-      font-family: Arial, sans-serif;
-      color: var(--gold);
-      font-size: 11px;
+      font-family: "Montserrat", Arial, sans-serif;
+      color: var(--blue);
+      font-size: 10px;
       font-weight: 800;
-      letter-spacing: .8px;
+      letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 5px;
     }
 
     .detail-value {
-      color: #fff3df;
-      font-size: 15px;
-      line-height: 1.3;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.35;
     }
 
     .map-btn {
       display: block;
       text-align: center;
-      border: 1px solid var(--gold);
-      border-radius: 9px;
-      color: var(--gold-light);
+      border: 1px solid rgba(102,118,148,.38);
+      border-radius: 14px;
+      color: var(--blue-deep);
+      background: rgba(255,255,255,.52);
       text-decoration: none;
       padding: 14px;
       margin-top: 20px;
-      font-family: Arial, sans-serif;
+      font-family: "Montserrat", Arial, sans-serif;
       font-weight: 800;
-      letter-spacing: .6px;
-      font-size: 13px;
+      letter-spacing: .8px;
+      font-size: 12px;
+      box-shadow: 0 10px 24px rgba(49,63,86,.08);
     }
 
 
     .special-details {
       background:
-        linear-gradient(180deg, rgba(255,255,255,.055), rgba(0,0,0,.18)),
-        rgba(0,0,0,.40);
-      border: 1px solid rgba(232,196,138,.30);
-      border-radius: 22px;
+        linear-gradient(180deg, rgba(255,255,255,.68), rgba(255,255,255,.46));
+      border: 1px solid rgba(102,118,148,.20);
+      border-radius: 28px;
       padding: 22px 18px;
       margin: 0 0 26px;
       text-align: center;
-      box-shadow: 0 18px 45px rgba(0,0,0,.22);
+      box-shadow: 0 18px 45px rgba(49,63,86,.10);
       scroll-margin-top: 20px;
       display: none;
     }
@@ -327,13 +373,13 @@
     .special-icon-wrap {
       width: 78px;
       height: 78px;
-      border-radius: 22px;
+      border-radius: 24px;
       margin: 0 auto 14px;
       display: grid;
       place-items: center;
-      background: radial-gradient(circle at top, rgba(232,196,138,.22), rgba(0,0,0,.22));
-      border: 1px solid rgba(232,196,138,.28);
-      box-shadow: 0 12px 28px rgba(0,0,0,.24);
+      background: rgba(255,255,255,.54);
+      border: 1px solid rgba(102,118,148,.22);
+      box-shadow: 0 12px 28px rgba(49,63,86,.10);
       overflow: hidden;
     }
 
@@ -345,18 +391,18 @@
     }
 
     .special-title {
-      font-family: Arial, sans-serif;
-      color: var(--gold);
+      font-family: "Montserrat", Arial, sans-serif;
+      color: var(--blue);
       letter-spacing: 2px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
       text-transform: uppercase;
       margin: 0 0 10px;
     }
 
     .special-message {
-      color: #fff3df;
-      font-size: 17px;
+      color: var(--ink);
+      font-size: 18px;
       line-height: 1.55;
       max-width: 390px;
       margin: 0 auto;
@@ -366,15 +412,16 @@
     .footer {
       text-align: center;
       padding: 20px 8px 0;
-      color: var(--gold-light);
-      font-size: 28px;
-      font-style: italic;
-      line-height: 1.45;
+      color: var(--blue-deep);
+      font-family: "Great Vibes", "Parisienne", "Cormorant Garamond", Georgia, serif;
+      font-size: 34px;
+      font-style: normal;
+      line-height: 1.35;
     }
 
     .status {
       margin-top: 14px;
-      font-family: Arial, sans-serif;
+      font-family: "Montserrat", Arial, sans-serif;
       font-size: 13px;
       color: var(--muted);
     }
@@ -383,7 +430,7 @@
       text-align: center;
       padding: 30px 10px;
       color: var(--muted);
-      font-family: Arial, sans-serif;
+      font-family: "Montserrat", Arial, sans-serif;
       line-height: 1.5;
     }
 
@@ -555,7 +602,7 @@
     }
 
     .splash-error-title {
-      color: var(--gold-light);
+      color: var(--blue-deep);
       font-weight: 800;
       font-size: 21px;
       margin-top: 26px;
@@ -586,8 +633,8 @@
     .menu-panel {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.78);
-      backdrop-filter: blur(8px);
+      background: rgba(63,83,114,.42);
+      backdrop-filter: blur(10px);
       z-index: 20;
       display: none;
       padding: 28px;
@@ -600,11 +647,12 @@
     .menu-box {
       max-width: 420px;
       margin: 70px auto 0;
-      background: rgba(12,8,4,.92);
-      border: 1px solid rgba(200,145,70,.35);
-      border-radius: 22px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(102,118,148,.25);
+      border-radius: 24px;
       padding: 24px;
       text-align: center;
+      box-shadow: 0 24px 70px rgba(49,63,86,.22);
     }
 
     .menu-box a,
@@ -613,19 +661,21 @@
       width: 100%;
       margin: 12px 0;
       padding: 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(200,145,70,.45);
-      background: transparent;
-      color: #fff1dc;
+      border-radius: 14px;
+      border: 1px solid rgba(102,118,148,.32);
+      background: rgba(255,255,255,.58);
+      color: var(--blue-deep);
       text-decoration: none;
-      font-size: 16px;
-      font-family: Arial, sans-serif;
+      font-size: 15px;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-weight: 700;
     }
 
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.72);
+      background: rgba(63,83,114,.46);
+      backdrop-filter: blur(8px);
       z-index: 30;
       display: none;
       align-items: center;
@@ -640,22 +690,26 @@
     .modal-box {
       width: 100%;
       max-width: 380px;
-      background: #120c07;
-      border: 1px solid rgba(200,145,70,.4);
-      border-radius: 20px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(102,118,148,.26);
+      border-radius: 24px;
       padding: 22px;
       text-align: center;
+      box-shadow: 0 24px 70px rgba(49,63,86,.22);
     }
 
     .modal-box h3 {
-      color: var(--gold-light);
+      color: var(--blue-deep);
       margin: 0 0 12px;
-      font-size: 24px;
+      font-size: 28px;
+      font-weight: 500;
     }
 
     .modal-box p {
       color: var(--muted);
-      line-height: 1.4;
+      line-height: 1.45;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 14px;
     }
 
     .modal-box input,
@@ -663,11 +717,12 @@
       width: 100%;
       margin: 8px 0;
       padding: 13px;
-      border-radius: 10px;
-      border: 1px solid rgba(200,145,70,.35);
-      background: rgba(255,255,255,.06);
-      color: white;
+      border-radius: 14px;
+      border: 1px solid rgba(102,118,148,.28);
+      background: rgba(255,255,255,.72);
+      color: var(--ink);
       font-size: 16px;
+      font-family: "Montserrat", Arial, sans-serif;
     }
 
     .modal-actions {
@@ -680,16 +735,16 @@
       .page {
         margin-top: 24px;
         margin-bottom: 24px;
-        border-radius: 22px;
+        border-radius: 28px;
         overflow: hidden;
-        box-shadow: 0 30px 80px rgba(0,0,0,.65);
+        box-shadow: 0 30px 80px rgba(49,63,86,.24);
       }
 
       .buttons {
         grid-template-columns: 1fr 1fr;
       }
     }
-  </style>
+</style>
 </head>
 
 <body>
@@ -804,7 +859,7 @@
 
   <div class="menu-panel" id="menuPanel">
     <div class="menu-box">
-      <h2 style="color:#e8c48a;margin-top:0;">Menú</h2>
+      <h2 style="color:#3f5372;margin-top:0;">Menú</h2>
       <a href="#content" onclick="closeMenu()">Mi invitación</a>
       <a href="#detalles" onclick="closeMenu()">Detalles del evento</a>
       <a href="#detallesEspeciales" id="menuDetallesEspeciales" onclick="closeMenu()">Detalles especiales</a>
