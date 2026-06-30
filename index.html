@@ -1106,15 +1106,18 @@
         const data = await res.json();
 
         if (data.ok) {
-          invitadoActual.estado = selectedStatus;
-          invitadoActual.personasConfirmadas = data.invitado.personasConfirmadas;
+         invitadoActual.estado = selectedStatus;
+        invitadoActual.personasConfirmadas = data.invitado.personasConfirmadas;
 
-          document.getElementById("currentStatus").textContent =
-            "Estado actual: " + selectedStatus;
+        document.getElementById("currentStatus").textContent =
+        "Estado actual: " + selectedStatus;
 
-          closeConfirmModal();
-          alert("Gracias, tu respuesta fue guardada correctamente.");
-        } else {
+       isSaving = false; // liberar bloqueo antes de cerrar
+
+      document.getElementById("confirmModal").classList.remove("active");
+
+       alert("Gracias, tu respuesta fue guardada correctamente.");
+      } else {
           alert(data.mensaje || "No se pudo guardar la confirmación.");
         }
 
