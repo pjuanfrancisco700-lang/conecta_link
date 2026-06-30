@@ -58,12 +58,7 @@
     }
 
     body {
-      background-image:
-        linear-gradient(to bottom, rgba(242,245,249,.38), rgba(232,237,244,.82)),
-        url("fondo-boda.jpg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: scroll;
+      background: #ffffff;
     }
 
     .page {
@@ -72,9 +67,12 @@
       margin: 0 auto;
       min-height: 100vh;
       padding: 22px 18px 40px;
-      background:
+      background-image:
         linear-gradient(180deg, rgba(255,255,255,.68), rgba(246,247,250,.84)),
-        rgba(255,255,255,.36);
+        url("fondo-boda.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       backdrop-filter: none;
       position: relative;
     }
@@ -463,15 +461,10 @@
 
       /* =====================================================
          PANTALLA DE CARGA / PORTADA CANVA
-         Cambia aquí la imagen de fondo diseñada en Canva.
-         Sube tu imagen al repositorio con este nombre:
-         loading-bg.jpg
+         La imagen loading-bg.jpg se muestra solo dentro
+         del ancho de la app. El fondo exterior queda blanco.
       ===================================================== */
-      background-image: url('loading-bg.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-color: #f5f2ec;
+      background: #ffffff;
 
       transition: opacity .45s ease, visibility .45s ease;
     }
@@ -479,9 +472,22 @@
     .splash-loader::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,.015);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 100%;
+      max-width: 520px;
+      transform: translateX(-50%);
+      background-image: url('loading-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #f5f2ec;
       pointer-events: none;
+    }
+
+    .splash-loader.error-mode::before {
+      display: none;
     }
 
     .splash-content {
@@ -756,6 +762,7 @@
         border-radius: 28px;
         overflow: hidden;
         box-shadow: 0 30px 80px rgba(49,63,86,.24);
+        min-height: calc(100vh - 48px);
       }
 
       .buttons {
