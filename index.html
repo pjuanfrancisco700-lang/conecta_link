@@ -441,6 +441,10 @@
       font-size: 13px;
       color: var(--muted);
     }
+    .status.status-gold {
+  color: #B89245;
+  font-weight: 700;
+}
 
     .loading {
       text-align: center;
@@ -1134,8 +1138,12 @@
          invitadoActual.estado = selectedStatus;
         invitadoActual.personasConfirmadas = data.invitado.personasConfirmadas;
 
-        document.getElementById("currentStatus").textContent =
+        const statusElement = document.getElementById("currentStatus");
+
+        statusElement.textContent =
         "Estado actual: " + selectedStatus;
+
+        statusElement.classList.add("status-gold");
 
        isSaving = false; // liberar bloqueo antes de cerrar
 
