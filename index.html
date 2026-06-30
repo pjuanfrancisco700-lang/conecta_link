@@ -1277,6 +1277,10 @@
       const splash = document.getElementById("splashLoader");
 
       if (splash) {
+
+        splash.style.backgroundImage = "none";
+        splash.style.background = "#ffffff";
+        
         splash.innerHTML = `
           <div class="splash-error">
             <div class="splash-envelope">
