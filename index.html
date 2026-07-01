@@ -777,7 +777,7 @@
 </head>
 
 <body>
-  <audio id="bgMusic" src="musica.mp3" loop autoplay preload="auto"></audio>
+  <audio id="bgMusic" src="musica.mp3" loop preload="auto"></audio>
 
   <div id="splashLoader" class="splash-loader" aria-label="Cargando invitación">
     <div class="splash-content">
@@ -1235,7 +1235,8 @@
       const audio = document.getElementById("bgMusic");
       const btn = document.getElementById("musicBtn");
       const text = document.getElementById("musicText");
-      let playing = true;
+      let playing = false;
+      let musicStarted = false;
 
       function setPlayingUI() {
         playing = true;
@@ -1249,29 +1250,26 @@
         text.innerHTML = "Reproducir<br>música";
       }
 
-      async function tryAutoPlay() {
+      async function playMusic() {
         try {
           audio.muted = false;
           await audio.play();
+          musicStarted = true;
           setPlayingUI();
-        } catch (e) {
+        } catch (error) {
           setPausedUI();
-
-          const unlockAudio = async () => {
-            try {
-              await audio.play();
-              setPlayingUI();
-              document.removeEventListener("click", unlockAudio);
-              document.removeEventListener("touchstart", unlockAudio);
-            } catch (error) {}
-          };
-
-          document.addEventListener("click", unlockAudio, { once: true });
-          document.addEventListener("touchstart", unlockAudio, { once: true });
         }
       }
 
-      tryAutoPlay();
+      setPausedUI();
+
+      const startMusicOnFirstTouch = () => {
+        if (musicStarted) return;
+        playMusic();
+      };
+
+      document.addEventListener("click", startMusicOnFirstTouch, { once: true });
+      document.addEventListener("touchstart", startMusicOnFirstTouch, { once: true });
 
       btn.addEventListener("click", async (e) => {
         e.stopPropagation();
@@ -1281,8 +1279,7 @@
             audio.pause();
             setPausedUI();
           } else {
-            await audio.play();
-            setPlayingUI();
+            await playMusic();
           }
         } catch (e) {
           alert("Toca nuevamente para reproducir la música.");
