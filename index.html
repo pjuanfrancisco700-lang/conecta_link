@@ -1359,20 +1359,58 @@
       setInterval(update, 1000);
     }
 
-    function parseEventDate(fecha, hora) {
+    function obtenerPartesFechaLocal(fecha) {
       if (!fecha) return null;
 
-      if (fecha instanceof Date) return fecha;
-
-      let fechaTexto = String(fecha).trim();
-
-      if (/^\d{4}-\d{2}-\d{2}$/.test(fechaTexto)) {
-        let horaTexto = convertirHora24(hora || "00:00");
-        return new Date(`${fechaTexto}T${horaTexto}:00`);
+      if (fecha instanceof Date && !isNaN(fecha.getTime())) {
+        return {
+          dia: fecha.getDate(),
+          mes: fecha.getMonth() + 1,
+          anio: fecha.getFullYear()
+        };
       }
 
-      const intento = new Date(fechaTexto);
-      return intento;
+      const fechaTexto = String(fecha).trim();
+
+      let match = fechaTexto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+      if (match) {
+        return {
+          dia: Number(match[3]),
+          mes: Number(match[2]),
+          anio: Number(match[1])
+        };
+      }
+
+      match = fechaTexto.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (match) {
+        return {
+          dia: Number(match[1]),
+          mes: Number(match[2]),
+          anio: Number(match[3])
+        };
+      }
+
+      return null;
+    }
+
+    function parseEventDate(fecha, hora) {
+      const partesFecha = obtenerPartesFechaLocal(fecha);
+
+      if (!partesFecha) return null;
+
+      const horaTexto = convertirHora24(hora || "00:00");
+      const partesHora = horaTexto.split(":");
+      const horas = Number(partesHora[0]) || 0;
+      const minutos = Number(partesHora[1]) || 0;
+
+      return new Date(
+        partesFecha.anio,
+        partesFecha.mes - 1,
+        partesFecha.dia,
+        horas,
+        minutos,
+        0
+      );
     }
 
     function convertirHora24(hora) {
@@ -1491,15 +1529,13 @@
     function formatDateText(value) {
       if (!value) return "--";
 
-      const date = new Date(value);
+      const partesFecha = obtenerPartesFechaLocal(value);
 
-      if (isNaN(date.getTime())) return value;
+      if (!partesFecha) return value;
 
-      return date.toLocaleDateString("es-GT", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-      });
+      return String(partesFecha.dia).padStart(2, "0") + "/" +
+        String(partesFecha.mes).padStart(2, "0") + "/" +
+        String(partesFecha.anio);
     }
   </script>
 </body>
